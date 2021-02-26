@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            background-color: rgb(23, 24, 17);
+        }
+
+        /* display div at center of screen */
+        .container {
+            height: 500px;
+            width: 500px;
+            color: white;
+            background: blueviolet;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .container h3 {
+            text-align: center;
+            margin-top: 120px;
+            font-size: 200%;
+            background-color: blueviolet;
+        }
+
+        #display {
+            font-size: 300%;
+            margin-top: 10%;
+            text-align: center;
+            background-color: blueviolet;
+        }
+
+        .buttons {
+            background-color: blueviolet;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #startstop {
+            width: 110px;
+            height: 50px;
+            margin-right: 5px;
+            background-color: blueviolet;
+            border: 2px solid chartreuse;
+            border-radius: 29px;
+            font-size: 130%;
+            transition: 0.7s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #startstop:hover {
+            background-color: rgb(63, 35, 88);
+            color: cornsilk;
+        }
+
+        #reset {
+            width: 110px;
+            height: 50px;
+            margin-right: 5px;
+            background-color: blueviolet;
+            border: 2px solid chartreuse;
+            border-radius: 29px;
+            font-size: 130%;
+            transition: 0.7s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #reset:hover {
+            background-color: rgb(63, 35, 88);
+            color: cornsilk;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>STOPWATCH</h3>
+        <hr>
+        <div id="display">
+            00:00:00
+        </div>
+
+        <div class="buttons">
+            <button id="startstop" onclick="startStop()">START</button>
+            <button id="reset" onclick="reset()">RESET</button>
+        </div>
+    </div>
+
+    <script>
+        // Define vars to hold time values
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        let displaySeconds = 0;
+        let displayHours = 0;
+        let displayMinutes = 0;
+
+        // var to hold set interval func
+        let interval = null;
+
+        // var to hold stopwatch status
+        let status = "stopped";
+
+        // Stopwatch function logic
+        function stopWatch() {
+            seconds++;
+            if (seconds / 60 === 1) {
+                seconds = 0;
+                minutes++;
+                if (minutes / 60 == 1) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            displaySeconds = (seconds < 10) ? "0" + seconds.toString() : seconds;
+            displayMinutes = (minutes < 10) ? "0" + minutes.toString() : minutes;
+            displayHours = (hours < 10) ? "0" + hours.toString() : hours;
+            // display updated time
+            document.getElementById("display").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+        }
+
+        // Manage start-stop
+        function startStop() {
+            if(status === "stopped") {
+                interval = window.setInterval(stopWatch, 1000);
+                document.getElementById("startstop").innerHTML = "STOP";
+                status = "started";
+            } else {
+                window.clearInterval(interval);
+                document.getElementById("startstop").innerHTML = "START";
+                status = "stopped";
+            }
+        }
+
+        // reset stop watch
+        function reset() {
+            window.clearInterval(interval);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById("display").innerHTML = "00:00:00";
+            document.getElementById("startstop").innerHTML = "START";
+        }
+
+    </script>
+</body>
+
+</html>
