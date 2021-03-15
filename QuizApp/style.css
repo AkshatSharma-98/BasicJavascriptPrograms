@@ -17,9 +17,23 @@ body {
 }
 
 .timer {
-    font-size: 260%;
+    font-size: 120%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 3px rgb(139, 136, 136), -1px 1px 3px rgb(139, 136, 136), 1px -1px 3px rgb(139, 136, 136), -1px -1px 3px rgb(139, 136, 136);
+    width: 150px;
+    height: 150px;
+    background-color: rgb(199, 235, 229);
+    border-radius: 50%;
     margin-bottom: 50px;
-    color: blanchedalmond;
+    color: rgb(36, 35, 7);
+}
+
+.timer.colorChange {
+    box-shadow: 3px 3px 23px rgb(139, 136, 136), -3px 3px 23px rgb(139, 136, 136), 3px -3px 23px rgb(139, 136, 136), -3px -3px 23px rgb(139, 136, 136);
+    background-color: red;
+    transition: 70s;
 }
 
 .container {
@@ -47,6 +61,7 @@ body {
     outline: none;
     cursor: pointer;
 }
+
 .btn:hover {
     background-color: honeydew;
     color: rgb(61, 3, 102);
@@ -64,7 +79,6 @@ body {
     background-color: red;
     pointer-events: none;
 }
-
 
 .controls {
     display: flex;

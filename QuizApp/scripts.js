@@ -16,18 +16,19 @@ var timeCnt = 30
 const countdown = document.getElementById('count_down')
 function setTimer() {
     var timer = setInterval(function () {
-        console.log(currQuesIndex)
         countdown.innerText = timeCnt + " SECONDS LEFT !"
         timeCnt--
         if (currQuesIndex == questions.length - 1) {
             answerButtonsElement.addEventListener('click', () => {
-                countdown.innerText = "COMPLETED IN " + (30 - timeCnt) + " SECONDS!"
+                countdown.innerText = "COMPLETED IN " + (30 - timeCnt - 1) + " SECONDS!"
                 clearInterval(timer)
             })
         }
-        if (timeCnt == 0) {
+        if (timeCnt == -1) {
             countdown.innerText = "YOUR TIME IS UP!"
             countdown.style.color = "red";
+            questionBarElement.style.display = 'none';
+            nextButton.style.display = 'none';
             clearInterval(timer)
         }
     }, 1000)
@@ -36,6 +37,7 @@ startButton.addEventListener('click', setTimer)
 
 function startGame() {
     startButton.classList.add('questionBar')
+    countdown.classList.add('colorChange')
     questionBarElement.classList.remove('questionBar')
     currQuesIndex = 0
     setNextQues()
